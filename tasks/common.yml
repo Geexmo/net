@@ -1,0 +1,12 @@
+---
+- name: Change interface name to net0
+  command: ip link set dev eth0 name net0
+  when: active_interface is defined and active_interface != "net0"
+
+- name: Display information about the renamed interface
+  command: ip addr show dev net0
+  register: net0_info
+
+- name: Output renamed interface information
+  debug:
+    msg: "Renamed interface information: {{ net0_info.stdout }}"

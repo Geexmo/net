@@ -1,0 +1,4 @@
+---
+- name: Change iface name to net0
+  include_tasks: net.yml
+  tags: net

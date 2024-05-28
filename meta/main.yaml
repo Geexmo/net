@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  namespace: common
+  author: mganin
+  license: other
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: DEB
+      versions:
+        - "22.04"
+
+dependencies: []
+
