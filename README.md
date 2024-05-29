@@ -1,3 +1,3 @@
 # Ansible Playbook for System Setup and Configuration
 
-This Ansible role is about disk encryption. Task Disables C-states for all available processors. Switches the processor from a power-saving mode to a more productive one.
+This Ansible role is about disk encryption. Task renames the active network interface to "net0" with netplan. Also it disables cloud-init netplan config so interface don't change name after reboot.
