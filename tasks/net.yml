@@ -1,12 +1,22 @@
 ---
-- name: Change interface name to net0
-  command: ip link set dev eth0 name net0
-  when: active_interface is defined and active_interface != "net0"
+- name: Disable cloud-init's network configuration
+  ansible.builtin.copy:
+    content: 'network: {config: disabled}'
+    dest: /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+
+- name: Edit cloud-init
+  ansible.builtin.template:
+    src: "templates/cloud-init.yml"
+    dest: /etc/netplan/50-cloud-init.yaml
+    owner: root
+    mode: 644
+  notify: Netplan apply
 
 - name: Display information about the renamed interface
   command: ip addr show dev net0
   register: net0_info
+  changed_when: false
 
 - name: Output renamed interface information
-  debug:
+  ansible.builtin.debug:
     msg: "Renamed interface information: {{ net0_info.stdout }}"
